@@ -48,7 +48,7 @@ class motion_executioner(Node):
         self.laser_logger=Logger('laser_content_'+str(motion_types[motion_type])+'.csv', headers=["ranges", "stamp"])
         
         # TODO Part 3: Create the QoS profile by setting the proper parameters in (...)
-        qos=QoSProfile(history = HistoryPolicy.KEEP_LAST, depth = 10, durability = DurabilityPolicy.VOLATILE, reliability = ReliabilityPolicy.RELIABLE)
+        qos=QoSProfile(history = HistoryPolicy.KEEP_LAST, depth = 10, durability = DurabilityPolicy.VOLATILE, reliability = ReliabilityPolicy.BEST_EFFORT)
 
         # TODO Part 5: Create below the subscription to the topics corresponding to the respective sensors
         # IMU subscription
