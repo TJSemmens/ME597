@@ -55,7 +55,6 @@ class FileReader:
             if not read_headers:
                 for line in file:
                     values=line.strip().split(',')
-
                     for val in values:
                         if val=='':
                             break
@@ -63,21 +62,31 @@ class FileReader:
 
                     read_headers=True
                     break
-            
             next(file)
-            
             # Read each line and extract values
             for line in file:
                 values = line.strip().split(',')
-                
-                row=[]                
-                
-                for val in values:
-                    if val=='':
-                        break
-                    row.append(float(val.strip()))
 
+                row=[]                
+                for val in values:
+                    replacers = {"[":"", "]" : "", ")":""}
+                    for symbol, space in replacers.items():
+                        val = val.replace(symbol, space)
+                    if val=='':
+                        print(True)
+                        break
+                    
+                    try:
+                        if val == " inf":
+                            # row.append(0)
+                            continue
+                        else:
+                            row.append(float(val.strip()))
+                    except:
+                        continue
+                print(len(row))
                 table.append(row)
+        print(table)
         
         return headers, table
 

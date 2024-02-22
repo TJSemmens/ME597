@@ -4,21 +4,32 @@
 
 import matplotlib.pyplot as plt
 from utilities import FileReader
-
+import numpy
 def plot_errors(filename):
     
     headers, values=FileReader(filename).read_file() 
-    time_list=[]
-    first_stamp=values[0][-1]
+    # time_list=[]
+    # first_stamp=values[0][-1]
     print(headers)
+    currentAngle = 0
+    incrementAngle = 0.5*numpy.pi/180
+    x = []
+    y = []
     for val in values:
-        time_list.append(val[-1] - first_stamp)
+        val.pop()
+        for range in val:
+            print(range)
+            x.append(numpy.cos(currentAngle)*range)
+            y.append(numpy.sin(currentAngle)*range)
+            currentAngle+= incrementAngle
+            print(currentAngle)
+    print(x)
 
-    for i in range(0, len(headers) - 1):
-        plt.plot(time_list, [lin[i] for lin in values], label= headers[i]+ " linear")
+
+    plt.scatter(x, y)
     
     #plt.plot([lin[0] for lin in values], [lin[1] for lin in values])
-    plt.legend()
+    # plt.legend()
     plt.grid()
     plt.show()
     

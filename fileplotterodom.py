@@ -8,14 +8,18 @@ from utilities import FileReader
 def plot_errors(filename):
     
     headers, values=FileReader(filename).read_file() 
-    time_list=[]
-    first_stamp=values[0][-1]
+    # time_list=[]
+    # first_stamp=values[0][-1]
+    x= []
+    y= []
     print(headers)
     for val in values:
-        time_list.append(val[-1] - first_stamp)
+        # time_list.append(val[-1] - first_stamp)
+        x.append(val[0])
+        y.append(val[1])
 
-    for i in range(0, len(headers) - 1):
-        plt.plot(time_list, [lin[i] for lin in values], label= headers[i]+ " linear")
+    for i in range(2):
+        plt.plot(x, y, label= headers[i]+ " linear")
     
     #plt.plot([lin[0] for lin in values], [lin[1] for lin in values])
     plt.legend()
