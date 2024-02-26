@@ -15,10 +15,13 @@ def plot_errors(filename):
         time_list.append(val[-1] - first_stamp)
 
     for i in range(0, len(headers) - 1):
-        plt.plot(time_list, [lin[i] for lin in values], label= headers[i]+ " linear")
+        plt.plot(time_list, [lin[i] for lin in values], label= headers[i])
     
     #plt.plot([lin[0] for lin in values], [lin[1] for lin in values])
     plt.legend()
+    plt.title("imu spiral acceleration vs time")
+    plt.xlabel("time(ms)")
+    plt.ylabel("acceleration(m/s^2)/angular acceleration(degree/s^2)")
     plt.grid()
     plt.show()
     

@@ -4,39 +4,29 @@
 
 import matplotlib.pyplot as plt
 from utilities import FileReader
-import numpy
+
 def plot_errors(filename):
     
     headers, values=FileReader(filename).read_file() 
-    # time_list=[]
-    # first_stamp=values[0][-1]
+    time_list=[]
+    first_stamp=values[0][-1]
     print(headers)
-    currentAngle = 0
-    incrementAngle = 0.5*numpy.pi/180
-    x = []
-    y = []
     for val in values:
-        val.pop()
-        for range in val:
-            print(range)
-            x.append(numpy.cos(currentAngle)*range)
-            y.append(numpy.sin(currentAngle)*range)
-            currentAngle+= incrementAngle
-            print(currentAngle)
-    print(x)
+        time_list.append(val[-1] - first_stamp)
 
-
-    plt.scatter(x, y)
+    for i in range(0, len(headers) - 1):
+        plt.plot(time_list, [lin[i] for lin in values], label= headers[i])
     
     #plt.plot([lin[0] for lin in values], [lin[1] for lin in values])
-    plt.legend(["observed reflections"])
-    plt.xlabel("x(m)")
-    plt.ylabel("y(m)")
-    plt.title("laser line reflection(1st snapshot)")
+    plt.legend()
+    plt.title("odom circle distance vs time")
+    plt.xlabel("time(ms)")
+    plt.ylabel("distance(m)/angle(degrees)")
     plt.grid()
     plt.show()
     
 import argparse
+
 
 if __name__=="__main__":
 

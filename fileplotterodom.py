@@ -19,10 +19,13 @@ def plot_errors(filename):
         y.append(val[1])
 
     for i in range(2):
-        plt.plot(x, y, label= headers[i]+ " linear")
+        plt.plot(x, y)
     
     #plt.plot([lin[0] for lin in values], [lin[1] for lin in values])
-    plt.legend()
+    plt.legend(["path"])
+    plt.xlabel('x(m)')
+    plt.ylabel('y(m)')
+    plt.title("odom spiral x vs y")
     plt.grid()
     plt.show()
     
