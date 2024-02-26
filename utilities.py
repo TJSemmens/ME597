@@ -73,7 +73,6 @@ class FileReader:
                     for symbol, space in replacers.items():
                         val = val.replace(symbol, space)
                     if val=='':
-                        print(True)
                         break
                     
                     try:
@@ -84,9 +83,7 @@ class FileReader:
                             row.append(float(val.strip()))
                     except:
                         continue
-                print(len(row))
                 table.append(row)
-        print(table)
         
         return headers, table
 

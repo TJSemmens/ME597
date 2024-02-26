@@ -5,34 +5,38 @@
 import matplotlib.pyplot as plt
 from utilities import FileReader
 import numpy
-def plot_errors(filename):
-    
-    headers, values=FileReader(filename).read_file() 
-    # time_list=[]
-    # first_stamp=values[0][-1]
-    print(headers)
-    currentAngle = 0
-    incrementAngle = 0.5*numpy.pi/180
-    x = []
-    y = []
-    for val in values:
-        val.pop()
-        for range in val:
-            print(range)
-            x.append(numpy.cos(currentAngle)*range)
-            y.append(numpy.sin(currentAngle)*range)
-            currentAngle+= incrementAngle
-            print(currentAngle)
-    print(x)
+markerList = ["o", "^","s"]
+colorList = ["blue", "orange", "grey"]
+nameList = ["circle", "line", "spiral"]
+def plot_errors(filenames):
+    count = 0
+    for filename in filenames:
+        headers, values=FileReader(filename).read_file() 
+        # time_list=[]
+        # first_stamp=values[0][-1]
+        currentAngle = 0
+        incrementAngle = 0.5*numpy.pi/180
+        x = []
+        y = []
+        for val in values:
+            val.pop()
+            for range in val:
+                # print(range)
+                x.append(numpy.cos(currentAngle)*range)
+                y.append(numpy.sin(currentAngle)*range)
+                currentAngle+= incrementAngle
+
+                plt.scatter(x, y, marker=markerList[count], c= colorList[count])
+        count+=1
 
 
-    plt.scatter(x, y)
+
     
     #plt.plot([lin[0] for lin in values], [lin[1] for lin in values])
-    plt.legend(["observed reflections"])
+    plt.legend(nameList, labelcolor = colorList)
     plt.xlabel("x(m)")
     plt.ylabel("y(m)")
-    plt.title("laser line reflection(1st snapshot)")
+    plt.title("laser reflection(1st snapshot)")
     plt.grid()
     plt.show()
     
@@ -48,5 +52,5 @@ if __name__=="__main__":
     print("plotting the files", args.files)
 
     filenames=args.files
-    for filename in filenames:
-        plot_errors(filename)
+    # for filename in filenames:
+    plot_errors(filenames)

@@ -4,28 +4,30 @@
 
 import matplotlib.pyplot as plt
 from utilities import FileReader
+nameList = ["circle", "line", "spiral"]
+def plot_errors(filenames):
+    count = 0
+    for filename in filenames:
+        headers, values=FileReader(filename).read_file() 
+        # time_list=[]
+        # first_stamp=values[0][-1]
+        x= []
+        y= []
+        print(headers)
+        for val in values:
+            # time_list.append(val[-1] - first_stamp)
+            x.append(val[0])
+            y.append(val[1])
 
-def plot_errors(filename):
-    
-    headers, values=FileReader(filename).read_file() 
-    # time_list=[]
-    # first_stamp=values[0][-1]
-    x= []
-    y= []
-    print(headers)
-    for val in values:
-        # time_list.append(val[-1] - first_stamp)
-        x.append(val[0])
-        y.append(val[1])
 
-    for i in range(2):
-        plt.plot(x, y)
+        plt.plot(x, y, label = nameList[count])
+        count +=1
     
     #plt.plot([lin[0] for lin in values], [lin[1] for lin in values])
-    plt.legend(["path"])
+    plt.legend()
     plt.xlabel('x(m)')
     plt.ylabel('y(m)')
-    plt.title("odom spiral x vs y")
+    plt.title("odom x vs y")
     plt.grid()
     plt.show()
     
@@ -41,5 +43,5 @@ if __name__=="__main__":
     print("plotting the files", args.files)
 
     filenames=args.files
-    for filename in filenames:
-        plot_errors(filename)
+    # for filename in filenames:
+    plot_errors(filenames)
