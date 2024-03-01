@@ -26,7 +26,18 @@ class planner:
 
     # TODO Part 6: Implement the trajectories here
     def trajectory_planner(self):
+    
+        pointList = []
+        for i in range(0,2,0.4):
+            x= i
+            #y=x^2
+            y= i^2
+            #y = 1/(1+e^(-x))
+            #y = 1/(1+math.exp(-i))
+            pointList.append([x,y])
+
+
         pass
         # the return should be a list of trajectory points: [ [x1,y1], ..., [xn,yn]]
-        # return 
+        return pointList
 
