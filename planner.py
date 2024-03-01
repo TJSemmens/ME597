@@ -1,7 +1,8 @@
 # Type of planner
 POINT_PLANNER=0; TRAJECTORY_PLANNER=1
 
-
+import numpy as np
+import math
 
 class planner:
     def __init__(self, type_):
@@ -28,13 +29,15 @@ class planner:
     def trajectory_planner(self):
     
         pointList = []
-        for i in range(0,2,0.4):
-            x= i
-            #y=x^2
-            y= i^2
-            #y = 1/(1+e^(-x))
-            #y = 1/(1+math.exp(-i))
-            pointList.append([x,y])
+        x = np.linspace(0, 2, 20)
+        #y = x ** 2
+        #y = 1/(1+e^(-x))
+        y = 1/(1+np.exp(-x))
+        # x=x.tolist()
+        # y=y.tolist()
+        for i in range(len(x)):
+            pointList.append([x[i], y[i]])
+            
 
 
         pass

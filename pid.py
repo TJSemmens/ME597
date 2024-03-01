@@ -15,7 +15,7 @@ class PID_ctrl:
         self.history_length=history_length
         self.history=[]
         self.history_integration = []
-        self.history_integration_length = 20 # integration needs larger history, however if it is too large, it would create larger actuations, try different numbers here
+        self.history_integration_length = 100 # integration needs larger history, however if it is too large, it would create larger actuations, try different numbers here
         self.type=type_
 
         # Controller gains
@@ -72,7 +72,7 @@ class PID_ctrl:
 
             # use constant dt if the messages arrived inconsistent
             # for example dt=0.1 overwriting the calculation          
-            if dt_avg == 0: dt_avg = 0.1
+            if dt_avg == 0: dt_avg = 0.01
             # TODO Part 5: calculate the error dot 
             error_dot+= (self.history[i][0] - self.history[i-1][0])/dt_avg
             
@@ -83,9 +83,11 @@ class PID_ctrl:
         sum_=0
         for hist in self.history_integration:
             # TODO Part 5: Gather the integration
-            sum_+=hist[0]
+            sum_+= hist[0] * dt_avg
+            pass
+            
         
-        error_int=sum_*dt_avg
+        error_int=sum_
         
         # TODO Part 4: Log your errors
         self.logger.log_values([latest_error, error_dot, error_int,Time.from_msg(self.history[-1][1]).nanoseconds])

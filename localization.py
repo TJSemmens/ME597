@@ -21,7 +21,7 @@ class localization(Node):
         # TODO Part 3: Define the QoS profile variable based on whether you are using the simulation (Turtlebot 3 Burger) or the real robot (Turtlebot 4)
         # Remember to define your QoS profile based on the information available in "ros2 topic info /odom --verbose" as explained in Tutorial 3
 
-        qos=QoSProfile(history = HistoryPolicy.KEEP_LAST, depth = 10, durability = DurabilityPolicy.VOLATILE, reliability = ReliabilityPolicy.RELIABLE)
+        qos=QoSProfile(history = HistoryPolicy.KEEP_LAST, depth = 10, durability = DurabilityPolicy.VOLATILE, reliability = ReliabilityPolicy.BEST_EFFORT)
         
         self.loc_logger=Logger("robot_pose.csv", ["x", "y", "theta", "stamp"])
         self.pose=None
@@ -48,7 +48,6 @@ class localization(Node):
 # This is to make sure this node functions right before using it in decision.py
 if __name__=="__main__":
     init()
-    
     ME=localization()
 
     try:
