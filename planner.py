@@ -10,7 +10,7 @@ class planner:
         self.type=type_
 
     
-    def plan(self, goalPoint=[-1.0, -1.0, 0.0]):
+    def plan(self, goalPoint=[0 -4.0, 0.0]):
         
         if self.type==POINT_PLANNER:
             return self.point_planner(goalPoint)
@@ -31,10 +31,7 @@ class planner:
         pointList = []
         x = np.linspace(0, 2, 20)
         #y = x ** 2
-        #y = 1/(1+e^(-x))
         y = 1/(1+np.exp(-x))
-        # x=x.tolist()
-        # y=y.tolist()
         for i in range(len(x)):
             pointList.append([x[i], y[i]])
             
