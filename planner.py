@@ -29,7 +29,7 @@ class planner:
     def trajectory_planner(self):
     
         pointList = []
-        x = np.linspace(0, 2, 20)
+        x = np.linspace(0, 1, 20)
         #y = x ** 2
         y = 1/(1+np.exp(-x))
         for i in range(len(x)):
